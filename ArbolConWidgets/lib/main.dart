@@ -27,8 +27,8 @@ class ArbolWidget extends StatefulWidget {
 }
 
 class _ArbolWidgettState extends State<ArbolWidget> {
-  @override
- Widget _buildIconColumn(IconData icon, String text, void Function() onPressed) {
+  Widget _buildIconColumn(
+      IconData icon, String text, void Function() onPressed) {
     return Column(
       children: [
         Container(
@@ -57,7 +57,7 @@ class _ArbolWidgettState extends State<ArbolWidget> {
         Container(
           width: 80,
           height: 40,
-          color: Colors.blue, // Cambiado a azul
+          color: Color.fromARGB(176, 0, 76, 139), // Cambiado a azul
           child: Center(
             child: Text(
               text,
@@ -68,6 +68,9 @@ class _ArbolWidgettState extends State<ArbolWidget> {
         ElevatedButton(
           onPressed: onPressed,
           child: const Text("Ir a la vista"),
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromARGB(255, 2, 82, 148), // Cambia el color aquí
+          ),
         ),
       ],
     );
@@ -77,7 +80,7 @@ class _ArbolWidgettState extends State<ArbolWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.only(top: 300, left: 30),
+        margin: const EdgeInsets.only(top: 230, left: 500),
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
