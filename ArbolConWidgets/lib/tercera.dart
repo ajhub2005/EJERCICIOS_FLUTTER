@@ -37,6 +37,7 @@ class TerceraVista extends StatelessWidget {
              
             Image.asset(
                     'assets/documental.jpg',
+                    
                     width: 300,
                     height: 300,
                   ),
