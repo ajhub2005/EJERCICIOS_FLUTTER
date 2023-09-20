@@ -3,34 +3,42 @@ import 'package:flutter/material.dart';
 void main() => runApp(const SpacedItemsList());
 
 class SpacedItemsList extends StatelessWidget {
-  const SpacedItemsList({super.key});
+  const SpacedItemsList({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    const items = 4;
+    const items = 5;
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Lista espaciada',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.deepPurple,
+          backgroundColor: const Color.fromARGB(0, 138, 127, 127),
+          accentColor: const Color.fromARGB(255, 4, 52, 92),
+        ),
         cardTheme: CardTheme(color: Colors.blue.shade50),
-        useMaterial3: true,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        body: LayoutBuilder(builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: List.generate(
-                    items, (index) => ItemWidget(text: 'Item $index')),
+        appBar: AppBar(
+          title: const Text('Lista de items espaciados'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: List.generate(
+              items,
+              (index) => Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: ItemWidget(text: 'Item $index'),
               ),
             ),
-          );
-        }),
+          ),
+        ),
       ),
     );
   }
@@ -38,15 +46,16 @@ class SpacedItemsList extends StatelessWidget {
 
 class ItemWidget extends StatelessWidget {
   const ItemWidget({
-    super.key,
+    Key? key,
     required this.text,
-  });
+  }) : super(key: key);
 
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 3,
       child: SizedBox(
         height: 100,
         child: Center(child: Text(text)),
