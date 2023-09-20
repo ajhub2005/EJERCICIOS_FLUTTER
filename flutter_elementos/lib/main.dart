@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const SpacedItemsList());
+void main() => runApp(const SpacioItemsListas());
 
-class SpacedItemsList extends StatelessWidget {
-  const SpacedItemsList({Key? key});
+class SpacioItemsListas extends StatelessWidget {
+  const SpacioItemsListas({Key? key});
 
   @override
   Widget build(BuildContext context) {
