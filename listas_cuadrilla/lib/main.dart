@@ -25,6 +25,11 @@ class MyWidget extends StatelessWidget {
 
   MyWidget({super.key});
 
+  // Función para asignar colores a cada cuadro de manera alternada
+  Color getBoxColor(int index) {
+    return index % 2 == 0 ? Color.fromARGB(255, 0, 139, 74) : Colors.green;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -37,8 +42,15 @@ class MyWidget extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return Card(
           elevation: 2,
+          color: getBoxColor(index), // Asignar el color aquí
           child: Center(
-            child: Text(items[index]),
+            child: Text(
+              items[index],
+              style: const TextStyle(
+                color: Colors.white, // Color del texto
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         );
       },

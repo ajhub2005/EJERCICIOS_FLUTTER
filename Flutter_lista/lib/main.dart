@@ -34,38 +34,47 @@ class MessageItem extends Item {
   MessageItem(this.category, this.gift) : super(ItemType.GiftItem);
 }
 
+class CategoryItem extends Item {
+  final String category;
+  final List<MessageItem> gifts;
+
+  CategoryItem(this.category, this.gifts) : super(ItemType.HeadingItem);
+}
+
 class MyListScreen extends StatelessWidget {
   final List<Item> items = [
-    HeadingItem('Lista de regalos'),
-    HeadingItem('HOGAR'),
-    MessageItem('','-Vajilla'),
-    MessageItem('','-Vasos'),
-    MessageItem('','-Copas de Vidrio'),
-    MessageItem('','-Licuadora'),
-    MessageItem('','-Lavadora'),
-    MessageItem('','-Colchon'),
-    //AQUI SE SEPARA LA LISTA PARA DAR PASO A OTRA CATEGORIA
-    HeadingItem('MODA'),
-    MessageItem('','-Vestido'),
-    MessageItem('','-Corbata'),
-    MessageItem('','-Zapatos'),
-    MessageItem('','-Bolso'),
-    MessageItem('','-Traje de Baño'),
-    //ESPACIO ENTRE CATEGORIAS
-    HeadingItem('ACCESORIOS'),
-    MessageItem('','-Aretes'),
-    MessageItem('','-Reloj'),
-    MessageItem('','-Gafas'),
-    MessageItem('','-Collar'),
-    //ESPACIO ENTRE CATEGORIAS
-    HeadingItem('TECNOLOGIA'),
-    MessageItem('','-Portatil'),
-    MessageItem('','-iPods Audifonos'),
-    //ESPACIO ENTRE CATEGORIAS
-    HeadingItem('OTROS'),
-    MessageItem('','-Decoracion'),
-    MessageItem('','-Carro'),
-    MessageItem('','-Viaje'),
+    ExpansionItem('Lista de regalos', [
+      CategoryItem('HOGAR', [
+        MessageItem('HOGAR', '-Vajilla'),
+        MessageItem('HOGAR', '-Vasos'),
+        MessageItem('HOGAR', '-Copas de Vidrio'),
+        MessageItem('HOGAR', '-Licuadora'),
+        MessageItem('HOGAR', '-Lavadora'),
+        MessageItem('HOGAR', '-Colchon'),
+      ]),
+      CategoryItem('MODA', [
+        MessageItem('MODA', '-Vestido'),
+        MessageItem('MODA', '-Corbata'),
+        MessageItem('MODA', '-Zapatos'),
+        MessageItem('MODA', '-Bolso'),
+        MessageItem('MODA', '-Traje de Baño'),
+      ]),
+      CategoryItem('ACCESORIOS', [
+        MessageItem('ACCESORIOS', '-Aretes'),
+        MessageItem('ACCESORIOS', '-Reloj'),
+        MessageItem('ACCESORIOS', '-Gafas'),
+        MessageItem('ACCESORIOS', '-Collar'),
+      ]),
+      CategoryItem('TECNOLOGIA', [
+        MessageItem('TECNOLOGIA', '-Portatil'),
+        MessageItem('TECNOLOGIA', '-iPods Audifonos'),
+      ]),
+      CategoryItem('OTROS', [
+        MessageItem('OTROS', '-Decoracion'),
+        MessageItem('OTROS', '-Carro'),
+        MessageItem('OTROS', '-Viaje'),
+      ]),
+    ]),
   ];
 
   Widget _buildItemWidget(Item item) {
@@ -81,8 +90,35 @@ class MyListScreen extends StatelessWidget {
         title: Text(item.gift),
         subtitle: Text(item.category),
       );
+    } else if (item is CategoryItem) {
+      return ExpansionTile(
+        initiallyExpanded: true,
+        trailing: Icon(Icons.keyboard_arrow_up),
+        title: Text(
+          item.category,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        children: item.gifts.map((gift) {
+          return ListTile(
+            title: Text(gift.gift),
+            subtitle: Text(gift.category),
+          );
+        }).toList(),
+      );
+    } else if (item is ExpansionItem) {
+      return ExpansionTile(
+        initiallyExpanded: true,
+        trailing: Icon(Icons.keyboard_arrow_up),
+        title: Text(
+          item.title,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        children: item.categories.map((category) {
+          return _buildItemWidget(category);
+        }).toList(),
+      );
     }
-    return SizedBox.shrink(); // Elemento desconocido, no mostrar nada
+    return SizedBox.shrink();
   }
 
   @override
@@ -100,4 +136,11 @@ class MyListScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class ExpansionItem extends Item {
+  final String title;
+  final List<CategoryItem> categories;
+
+  ExpansionItem(this.title, this.categories) : super(ItemType.HeadingItem);
 }

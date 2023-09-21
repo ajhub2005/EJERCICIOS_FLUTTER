@@ -5,139 +5,73 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Arbol(),
+      home: LoginPage(),
     );
   }
 }
 
-class Arbol extends StatelessWidget {
-  const Arbol({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.only(top: 100, left: 50),
+        margin: const EdgeInsets.only(top: 300, left: 400),
         padding: const EdgeInsets.all(16.0),
-        child: Row(
+        child: Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.teal,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  width: 80,
-                  height: 40,
-                  color: Colors.purple,
-                  child: const Center(
-                    child: Text(
-                      'Primera Vista',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
+            const Text(
+              'ALEJANDRO HOYOS BARRIOS-ADSO 3', // Agregamos un título
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(width: 20),
-            Column(
+            const SizedBox(height: 20), // Espacio entre el título y los iconos
+            Row(
               children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
+                Column(
+                  children: [
+                    const Icon(Icons.access_alarm),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.blue,
+                      child: const Center(
+                        child: Text('ONE PIECE'),
                       ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.white,
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  width: 80,
-                  height: 40,
-                  color: Colors.green,
-                  child: const Center(
-                    child: Text(
-                      'Segunda Vista',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(width: 20),
-            Column(
-              children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
+                const SizedBox(width: 10),
+                Column(
+                  children: [
+                    const Icon(Icons.airplane_ticket),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.green,
+                      child: const Center(
+                        child: Text('AKAME'),
                       ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.white,
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  width: 80,
-                  height: 40,
-                  color: Colors.blue,
-                  child: const Center(
-                    child: Text(
-                      'Tercera vista',
-                      style: TextStyle(color: Colors.white),
+                const SizedBox(width: 10),
+                Column(
+                  children: [
+                    const Icon(Icons.beach_access),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.orange,
+                      child: const Center(
+                        child: Text('DBZ'),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
